@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/bassham-aws/api-test/environment"
 	"github.com/rickbassham/goapi/middleware"
 )
 
@@ -12,6 +13,7 @@ type ErrorResponse struct {
 }
 
 type FooResponse struct {
+	AppEnv  string `json:"env"`
 	Message string `json:"message"`
 	ErrorResponse
 }
@@ -37,6 +39,7 @@ func (svc *HandlerService) Foo(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	svc.writeJSONResponse(w, http.StatusOK, &FooResponse{
+		AppEnv:  environment.AppEnv(),
 		Message: "bar",
 	})
 
