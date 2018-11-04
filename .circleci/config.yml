@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --no-cache py-pip
+            apk add --no-cache py-pip jq
             pip install awscli
 
       - run:
@@ -23,9 +23,11 @@ jobs:
           command: |
             docker build -t ${AWS_ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/api-test:${CIRCLE_TAG} .
 
-      - deploy:
-          name: Push to AWS
+      - run:
+          name: Push Container to ECR
           command: |
+            chmod +x assumerole.sh
+            source assumerole.sh
             login = "$(aws ecr get-login --no-include-email)"
             ${login}
             docker push ${AWS_ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/api-test:${CIRCLE_TAG}
