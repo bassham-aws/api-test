@@ -26,11 +26,8 @@ jobs:
       - run:
           name: Push Container to ECR
           command: |
-            chmod +x assumerole.sh
-            source assumerole.sh
-            login="$(aws ecr get-login --no-include-email)"
-            echo ${login}
-            ${login}
+            chmod +x deployment/docker-login.sh
+            source deployment/docker-login.sh
             docker push ${AWS_ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/api-test:${CIRCLE_TAG}
 
 workflows:
