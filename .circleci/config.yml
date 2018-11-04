@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Build docker image
           command: |
-            docker build -t $AWS_ACCOUNT.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/bassham-aws/api-test:$CIRCLE_TAG+$CIRCLE_SHA1 .
+            docker build -t $AWS_ACCOUNT.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/api-test:$CIRCLE_TAG+$CIRCLE_SHA1 .
 
 workflows:
   version: 2
@@ -34,3 +34,5 @@ workflows:
               ignore: /.*/
             tags:
               only: /^v(\d+)\.(\d+)\.(\d+)(-rc\.\d+)?$/
+
+# ^v(\d+)\.(\d+)\.(\d+)(-rc\.\d+)?(\+[0-9A-F]+)?(\.[0-9]+)?$
