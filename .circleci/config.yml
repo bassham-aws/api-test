@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Build docker image
           command: |
-            docker build -t ${AWS_ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/api-test:${CIRCLE_TAG}_${CIRCLE_SHA1} .
+            docker build -t ${AWS_ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/api-test:${CIRCLE_TAG} .
 
 workflows:
   version: 2
