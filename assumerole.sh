@@ -15,7 +15,13 @@ echo $AWS_ACCESS_KEY_ID
 echo $AWS_SECRET_ACCESS_KEY
 echo $AWS_SESSION_TOKEN
 
-login = "$(aws ecr get-login --no-include-email)"
+echo "Doing ecr get-login"
+
+login="$(aws ecr get-login --no-include-email)"
+
+echo "Login Command:"
 echo ${login}
+
+echo "Executing command"
 ${login}
 docker push ${AWS_ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/api-test:${CIRCLE_TAG}
